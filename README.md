@@ -110,6 +110,7 @@ langCode2/
     is "scraping" and each module uses its own collection ("twitter","blogposts","forumposts")
  
 4. Use helper script
+
   For you convenience we included a python script that prints all the documents to stdout.
   To print all the Mongolian data we can run this:
   ```shell
