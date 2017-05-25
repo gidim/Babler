@@ -60,7 +60,7 @@ $ java -jar target/Babel-1.0.jar -m twitter --langs mon spa heb --seedsFolder /p
 Similarly to the previous example we use the twitter module. In this case we use the --langs flag to collect data in Mongolian, Spanish and Hebrew. We also use the --seedsFolder to provide a path to the respective wordlists. Your seeds folder should follow the following structure:
 ```shell
 $ ls /path/to/seed_folder/
-monMostCommon.txt spaMostCommmon.txt hebMostCommon.txt
+mon.txt spa.txt heb.txt
 ```
  
  
