@@ -28,7 +28,7 @@ Make sure you set `productionScarpingFolderPath` to some directory where you hav
 #### Building 
 If you made any code changes you must rebuild the project. To do this run
 ```shell
-$ mvn clean install -Dmaven.test.skip=true
+$ mvn clean install
 ```
  
  
@@ -42,7 +42,7 @@ we can build a list of medical terms and then save all the tweets that contain t
 the tweets we find are in Spanish. 
  
 ```shell
-$ java -jar target/Babel-1.0.jar --module twitter -wordlist /path/to/wordlist.txt  --lang spa --config my_config.properties
+$ java -jar target/Babel-1.0.jar --module twitter -wordlist /path/to/wordlist.txt  --lang spa --config config.properties
 ```
  
 In this example we set the module to twitter, use the wordlist argument to provide a path to a file that contains words (one per line) and force the results to be in Spanish using the ISO639-2 language code format. We also use the --config flag to provide the path to the config file that contains the API keys.
@@ -54,7 +54,7 @@ In this example we set the module to twitter, use the wordlist argument to provi
 In this case we're interested in collecting tweets in English and Spanish with different words for each language.
 This is very similar to the previous example but it allows us to run the same task to multiple languages/word lists.
 ```shell
-$ java -jar target/Babel-1.0.jar -m twitter --langs mon spa heb --seedsFolder /path/to/seed_folder/ --config my_config.properties
+$ java -jar target/Babel-1.0.jar -m twitter --langs mon spa heb --seedsFolder /path/to/seed_folder/ --config config.properties
 ```
  
 Similarly to the previous example we use the twitter module. In this case we use the --langs flag to collect data in Mongolian, Spanish and Hebrew. We also use the --seedsFolder to provide a path to the respective wordlists. Your seeds folder should follow the following structure:
