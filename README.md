@@ -118,6 +118,9 @@ langCode2/
   ```
 Where LANGCODE is the ISO639-2 language code you used for collection.
  
+ ## Additional Stuff
+[List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
+ 
  
  ## References 
  If you use Babler for research or academic purposes please cosider citing our paper
@@ -132,10 +135,8 @@ Where LANGCODE is the ISO639-2 language code you used for collection.
   year={2016}
 }
 ```
- 
-## Additional Stuff
-[List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
- 
+
+
 ## Acknowledgements
 
 This work is supported by the Intelligence Advanced Research
