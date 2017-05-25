@@ -28,7 +28,6 @@ public class TestLanguageManager
     public void testGetMostCommonWords() throws IOException {
         //from existing data for ngram=1
         Assert.assertNotNull(BabelConfig.getResource("languageData/" + "mon" + "MostCommon.txt"));
-        Assert.assertTrue((new File(BabelConfig.getResource("languageData/" + "eng" + "MostCommon.txt"))).exists());
         ArrayList<String> mon = LanguageDataManager.getMostCommonWords("mon", 100, 1);
         Assert.assertNotNull(mon);
         Assert.assertEquals("нь", mon.get(0));
