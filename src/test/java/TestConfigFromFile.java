@@ -43,7 +43,6 @@ public class TestConfigFromFile {
         assertNotNull(cfg.google_cse_key());
         assertNotNull(cfg.lang());
         assertNotNull(cfg.module());
-        assertNotNull(cfg.xml_file());
         assertNotNull(cfg.debug());
         assertNotNull(cfg.console_log_level());
         assertNotNull(cfg.file_log_level());
@@ -67,7 +66,6 @@ public class TestConfigFromFile {
         assertNotNull(cfg.google_cse_key());
         assertNotNull(cfg.lang());
         assertNotNull(cfg.module());
-        assertNotNull(cfg.xml_file());
         assertNotNull(cfg.debug());
         assertNotNull(cfg.console_log_level());
         assertNotNull(cfg.file_log_level());

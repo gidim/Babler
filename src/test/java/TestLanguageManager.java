@@ -1,6 +1,5 @@
 import edu.columbia.main.LanguageDataManager;
 import edu.columbia.main.configuration.BabelConfig;
-import net.lingala.zip4j.core.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;

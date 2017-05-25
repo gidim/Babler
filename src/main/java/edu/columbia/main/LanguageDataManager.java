@@ -1,7 +1,6 @@
 package edu.columbia.main;
 
 import edu.columbia.main.configuration.BabelConfig;
-import net.lingala.zip4j.core.ZipFile;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;

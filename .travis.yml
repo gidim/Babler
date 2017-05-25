@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk7
+jdk: oraclejdk8
 before_install:
   - mvn install:install-file -Dfile=lib/azure-bing-search-java-0.12.0.jar -DgroupId=net.billylieurance.azuresearch -DartifactId=azure-bing-search-java -Dversion=0.12.0 -Dpackaging=jar
   - mvn install:install-file -Dfile=lib/diffbot-java-1.0-SNAPSHOT.jar -DgroupId=diffbot -DartifactId=diffbot-java -Dversion=1.0-SNAPSHOT -Dpackaging=jar

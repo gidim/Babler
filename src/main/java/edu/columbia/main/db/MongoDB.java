@@ -20,12 +20,6 @@ public enum MongoDB {
     MongoClient mongoClient;
 
     MongoDB(){
-//        MongoCredential credential = MongoCredential.createScramSha1Credential("admin",
-//                "admin",
-//                "speechLab".toCharArray());
-//        List<MongoCredential> lst = new ArrayList<MongoCredential>();
-//        lst.add(credential);
-
         mongoClient = new MongoClient(new ServerAddress("127.0.0.1",27017));
     }
 
@@ -33,5 +27,8 @@ public enum MongoDB {
         return mongoClient.getDatabase(dbName);
     }
 
+    public void setClient(MongoClient client) {
+        this.mongoClient = client;
+    }
 }
 

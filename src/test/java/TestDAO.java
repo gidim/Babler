@@ -1,15 +1,43 @@
+import com.mongodb.BasicDBObject;
+import de.flapdoodle.embed.mongo.MongodExecutable;
+import de.flapdoodle.embed.mongo.MongodProcess;
+import de.flapdoodle.embed.mongo.MongodStarter;
+import de.flapdoodle.embed.mongo.config.IMongodConfig;
+import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
+import de.flapdoodle.embed.mongo.config.Net;
+import de.flapdoodle.embed.mongo.distribution.Version;
+import de.flapdoodle.embed.process.runtime.Network;
 import edu.columbia.main.db.DAO;
 import edu.columbia.main.db.Models.Tweet;
 import edu.columbia.main.db.MongoDB;
 import junit.framework.Assert;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 /**
  * Created by Gideon on 10/1/15.
  */
 public class TestDAO {
 
+    MongodExecutable mongodExecutable = null;
+
+    @Before
+    public void setUp() throws IOException {
+        MongodStarter starter = MongodStarter.getDefaultInstance();
+        String bindIp = "localhost";
+        int port = 27017;
+        IMongodConfig mongodConfig = new MongodConfigBuilder()
+                .version(Version.Main.PRODUCTION)
+                .net(new Net(bindIp, port, Network.localhostIsIPv6()))
+                .build();
+
+
+        mongodExecutable = starter.prepare(mongodConfig);
+        MongodProcess mongod = mongodExecutable.start();
+    }
 
     @Test
     public void testInsert(){
@@ -67,8 +95,8 @@ public class TestDAO {
 
 
     @After
-    public void tearDown(){
-        MongoDB.INSTANCE.getDatabase("testing").drop();
+    public void tearDown() {
+        if (mongodExecutable != null)
+            mongodExecutable.stop();
     }
-
 }
