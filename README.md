@@ -35,7 +35,7 @@ $ mvn clean install
  
  
  
-## Usage
+## Usage Examples
  
 #### Collecting Spanish Tweets that contains a word from a word list
  
