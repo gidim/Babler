@@ -3,7 +3,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-Web Data Collection System For NLP/Speech Recognition 
+Web Data Collection System For NLP/Speech Recognition tasks. Automatically collects data from Twitter, Blogs and Forums
+without implementing any additional logic.
  
  
 ## Introduction
