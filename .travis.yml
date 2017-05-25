@@ -11,7 +11,7 @@ before_install:
 
 install: true
 
-script: mvn clean verify
+script: mvn clean verify -e -X
 
 cache:
   directories:
