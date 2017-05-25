@@ -1,5 +1,7 @@
 # Babler
 [![Build Status](https://travis-ci.org/gidim/Babler.svg?branch=master)](https://travis-ci.org/gidim/Babler)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 
 Web Data Collection System For NLP/Speech Recognition 
  
