@@ -114,7 +114,7 @@ langCode2/
   For you convenience we included a python script that prints all the documents to stdout.
   To print all the Mongolian data we can run this:
   ```shell
-	$   python scripts/py_mongo.py LANGCODE > mongolian_data.txt
+	$   python scripts/echo_langcode.py LANGCODE > mongolian_data.txt
   ```
 Where LANGCODE is the ISO639-2 language code you used for collection.
  
