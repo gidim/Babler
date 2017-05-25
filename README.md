@@ -124,4 +124,15 @@ Where LANGCODE is the ISO639-2 language code you used for collection.
 ## Additional Stuff
 [List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
  
- 
+## Acknowledgements
+
+This work is supported by the Intelligence Advanced Research
+Projects Activity (IARPA) via Department of Defense
+U.S. Army Research Laboratory (DoD/ARL) contract number
+W911NF-12-C-0012. The U.S. Government is authorized to
+reproduce and distribute reprints for Governmental purposes
+notwithstanding any copyright annotation thereon. Disclaimer:
+The views and conclusions contained herein are those of the authors
+and should not be interpreted as necessarily representing
+the official policies or endorsements, either expressed or implied,
+of IARPA, DoD/ARL, or the U.S. Government.
