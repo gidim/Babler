@@ -119,7 +119,19 @@ langCode2/
 Where LANGCODE is the ISO639-2 language code you used for collection.
  
  
- 
+ ## References 
+ If you use Babler for research or academic purposes please cosider citing our paper
+ [1] Gideon Mendels, Erica Cooper, Julia Hirschberg, [*Babler - Data Collection from the Web to Support Speech Recognition and Keyword Search*](http://www.aclweb.org/anthology/W16-26#page=82)
+
+ ```
+@inproceedings{mendels2016babler,
+  title={Babler-Data Collection from the Web to Support Speech Recognition and Keyword Search},
+  author={Mendels, Gideon and Cooper, Erica and Hirschberg, Julia},
+  booktitle={Proc. of Web as Corpus Workshop (WAC-X) and the EmpiriST Shared Task},
+  pages={72--81},
+  year={2016}
+}
+```
  
 ## Additional Stuff
 [List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
