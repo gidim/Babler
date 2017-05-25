@@ -38,34 +38,6 @@ public class TestDAO {
 
     }
 
-    @Test
-    public void testgetCollectionCountInLanguage(){
-
-        Assert.assertEquals(4283, DAO.getCollectionCountInLanguage("tweets", "scraping"));
-
-        Assert.assertEquals(0, DAO.getCollectionCountInLanguage("x", "scraping"));
-
-        Assert.assertEquals(0, DAO.getCollectionCountInLanguage("tweets", "x"));
-
-        Assert.assertEquals(0, DAO.getCollectionCountInLanguage("x", "x"));
-    }
-
-    @Test
-    public void testBasicDBObjects(){
-        Assert.assertEquals(2989, DAO.getBasicDBObjects(0, 10, "amh", "tweets", "scraping").size());
-
-        Assert.assertEquals(0, DAO.getBasicDBObjects(0, 10, "amh", "x", "scraping").size());
-
-        Assert.assertEquals(0, DAO.getBasicDBObjects(0, 10, "amh", "tweets", "x").size());
-
-        Assert.assertEquals(0, DAO.getBasicDBObjects(0, 10, "amh", "x", "x").size());
-
-        Assert.assertEquals(0, DAO.getBasicDBObjects(0, 10, "x", "tweets", "scraping").size());
-
-        Assert.assertEquals(0, DAO.getBasicDBObjects(0, 10, "x", "x", "x").size());
-    }
-
-
     @After
     public void tearDown(){
         MongoDB.INSTANCE.getDatabase("testing").drop();
