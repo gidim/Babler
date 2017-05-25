@@ -7,7 +7,8 @@ Web Data Collection System For NLP/Speech Recognition
  
  
 ## Introduction
-Babler is a program that collects textual data from the internet autonomously. The user provides the program with a language code and list of the most common words in the language and the collection process begins. We currently support the following sources: Twitter, BlogSpot, WordPress, TED.com, Wikipedia and YouTube subtitles. Each document retrieved from the internet is check using a Language Identification model the encapsules three different classifiers. Data is saved to a MongoDB Database system and to text files.
+Babler is a program that collects textual data from the internet autonomously for Natural Language Processing and other Machine learning tasks. Unlike other tools we focus on conversational data in the form of tweets, blog posts and forum posts. Conversational data is usefl for many NLP tasks. We used this tool to collect data for training language models, improving keyword search, collecting code-switch data, sentiment analysis data and emotion recognition. Babler language identifcation supports 504 languages in a majorty vote over an ensamble of classifiers which makes it a great tool for collecting low resource languages.
+
  
 ## Installation
  
