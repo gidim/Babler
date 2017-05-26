@@ -3,12 +3,11 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-Web Data Collection System For NLP/Speech Recognition tasks. Automatically collects data from Twitter, Blogs and Forums
-without implementing any additional logic.
- 
+Web Data Collection System For NLP/Speech Recognition tasks. Automatically collects data from Twitter, Blogs and Forums in over 500 languages.
+
  
 ## Introduction
-Babler is a program that collects textual data from the internet autonomously for Natural Language Processing and other Machine learning tasks. Unlike other tools we focus on conversational data in the form of tweets, blog posts and forum posts. Conversational data is usefl for many NLP tasks. We used this tool to collect data for training language models, improving keyword search, collecting code-switch data, sentiment analysis data and emotion recognition. Babler language identifcation supports 504 languages in a majorty vote over an ensamble of classifiers which makes it a great tool for collecting low resource languages.
+Babler is a program that collects textual data from the internet autonomously for Natural Language Processing and other Machine learning tasks. Unlike other tools we focus on conversational data in the form of tweets, blog posts and forum posts. Conversational data is useful for many NLP tasks. We used this tool to collect data for training language models, improving keyword search, collecting code-switch data, sentiment analysis data and emotion recognition. Babler language identifcation supports 504 languages in a majorty vote over an ensamble of classifiers which makes it a great tool for collecting low resource languages.
 
  
 ## Installation
