@@ -94,8 +94,10 @@ public class TwitterCodeSwitchSJobManager {
                             continue;
                         }
                     }
-                }
-                finally {
+                } catch (Exception e) {
+                    log.error(e);
+                    System.exit(-1);
+                } finally {
                     keyIndex++;
                     if (keyIndex == keys.length)//wraparound
                         keyIndex = 0;

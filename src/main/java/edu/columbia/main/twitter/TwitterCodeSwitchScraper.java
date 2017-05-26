@@ -47,7 +47,7 @@ public class TwitterCodeSwitchScraper {
      * Iterates over all seed words
      * @throws TwitterException
      */
-    public void scrapeByLanguage() throws TwitterException {
+    public void scrapeByLanguage() throws TwitterException, Exception {
 
         while(true) {
             Iterator it = words.iterator();
@@ -74,24 +74,21 @@ public class TwitterCodeSwitchScraper {
      * @param lang that tweets should be in
      * @throws TwitterException
      */
-    private void searchAndSave(String word, LanguageDetector lp, String lang) throws TwitterException {
+    private void searchAndSave(String word, LanguageDetector lp, String lang) throws TwitterException, Exception {
         log.info("Searching for posts that contain the word: " + word);
         Query query = new Query("\""+word+"\"");
         // Since we're looking for code switching data we'll set the language code to be
         // in a different language then what the word is in.
-
-
-        // This searches for english/spanish CS, for other pairs change following lines:
-//        String firstLangArgument = BabelConfig.getInstance().getListOfLanguages()[0];
-//        String secondLangArgument = BabelConfig.getInstance().getListOfLanguages()[1];
-
-        if(lang.equals("en")){
-            query.setLang("es");
+        String firstLangArgument = BabelConfig.getInstance().getListOfLanguages()[0];
+        String secondLangArgument = BabelConfig.getInstance().getListOfLanguages()[1];
+        if(lang.equals(firstLangArgument)){
+            query.setLang(secondLangArgument);
         }
-        else if (lang.equals("es")){
-            query.setLang("en");
+        else if (lang.equals(secondLangArgument)){
+            query.setLang(firstLangArgument);
+        } else {
+            throw new TwitterException("Wrong language arguments.");
         }
-
 
         query.setCount(100);
         query.setSince("2010-01-01");
@@ -112,9 +109,10 @@ public class TwitterCodeSwitchScraper {
                         content = new TwitterNormalizer().cleanTweet(content);
                         if (content.contains(word)) {
                             log.info("\n");
-                            FileSaver file = new FileSaver(content, lang, "twitter_cs", url, String.valueOf(tweet.getId()));
+                            String output_dir = "twitter_cs_" + firstLangArgument + "+" + secondLangArgument;
+                            FileSaver file = new FileSaver(content, lang, output_dir, url, String.valueOf(tweet.getId()));
                             String filename = file.getFileName();
-                            Tweet t = new Tweet(content,origContent,this.lang,tweet.getUser().getScreenName(),null,"twitter_cs",url,String.valueOf(tweet.getId()),filename);
+                            Tweet t = new Tweet(content,origContent,this.lang,tweet.getUser().getScreenName(),null, output_dir,url,String.valueOf(tweet.getId()),filename);
                             if(DAO.saveEntry(t))
                                 file.save(logDb);
                             this.map.put(tweet.getText(),true); //to not repeat
