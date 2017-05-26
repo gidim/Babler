@@ -110,6 +110,14 @@ public class BabelMain {
         if (debug){
             testLanguageId();
         }
+        /**
+         * load config file from path given.
+         * If not provided default would be loaded from src/main/java/edu.columbia.main/configuration/ConfigFromFile.properties
+         */
+        if(pathConfig!=null)
+        {
+            BabelConfig.InsteantiateWithConfigFile(pathConfig);
+        }
 
         if(langs != null){
             BabelConfig.getInstance().setLanguages(langs);
@@ -127,14 +135,7 @@ public class BabelMain {
         String language = langCode;
 
 
-        /**
-         * load config file from path given.
-         * If not provided default would be loaded from src/main/java/edu.columbia.main/configuration/ConfigFromFile.properties
-         */
-        if(pathConfig!=null)
-        {
-            BabelConfig.InsteantiateWithConfigFile(pathConfig);
-        }
+
 
         if(wordList != null){
             BabelConfig.getInstance().setPathToWordsList(wordList);

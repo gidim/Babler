@@ -19,7 +19,7 @@ public class BabelConfig {
     private static Logger log = Logger.getLogger(BabelConfig.class);
     private static volatile BabelConfig instance = null;
     private ConfigFromFile cfg;
-    private String[] collectionLanguage = new String[]{"eng"};
+    private String[] collectionLanguage;
     private String pathToWordsList;
     private String pathToDataFolder;
 
