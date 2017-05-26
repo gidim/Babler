@@ -1,9 +1,15 @@
 # Babler
-Web Data Collection System For NLP/Speech Recognition 
+[![Build Status](https://travis-ci.org/gidim/Babler.svg?branch=master)](https://travis-ci.org/gidim/Babler)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+
+Web Data Collection System For NLP/Speech Recognition tasks. Automatically collects data from Twitter, Blogs and Forums
+without implementing any additional logic.
  
  
 ## Introduction
-Babler is a program that collects textual data from the internet autonomously. The user provides the program with a language code and list of the most common words in the language and the collection process begins. We currently support the following sources: Twitter, BlogSpot, WordPress, TED.com, Wikipedia and YouTube subtitles. Each document retrieved from the internet is check using a Language Identification model the encapsules three different classifiers. Data is saved to a MongoDB Database system and to text files.
+Babler is a program that collects textual data from the internet autonomously for Natural Language Processing and other Machine learning tasks. Unlike other tools we focus on conversational data in the form of tweets, blog posts and forum posts. Conversational data is usefl for many NLP tasks. We used this tool to collect data for training language models, improving keyword search, collecting code-switch data, sentiment analysis data and emotion recognition. Babler language identifcation supports 504 languages in a majorty vote over an ensamble of classifiers which makes it a great tool for collecting low resource languages.
+
  
 ## Installation
  
@@ -33,7 +39,7 @@ $ mvn clean install
  
  
  
-## Usage
+## Usage Examples
  
 #### Collecting Spanish Tweets that contains a word from a word list
  
@@ -108,17 +114,42 @@ langCode2/
     is "scraping" and each module uses its own collection ("twitter","blogposts","forumposts")
  
 4. Use helper script
+
   For you convenience we included a python script that prints all the documents to stdout.
   To print all the Mongolian data we can run this:
   ```shell
-	$   python scripts/py_mongo.py LANGCODE > mongolian_data.txt
+	$   python scripts/echo_langcode.py LANGCODE > mongolian_data.txt
   ```
 Where LANGCODE is the ISO639-2 language code you used for collection.
  
- 
- 
- 
-## Additional Stuff
+ ## Additional Stuff
 [List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
  
  
+ ## References 
+ If you use Babler for research or academic purposes please cosider citing our paper
+ [1] Gideon Mendels, Erica Cooper, Julia Hirschberg, [*Babler - Data Collection from the Web to Support Speech Recognition and Keyword Search*](http://www.aclweb.org/anthology/W16-26#page=82)
+
+ ```
+@inproceedings{mendels2016babler,
+  title={Babler-Data Collection from the Web to Support Speech Recognition and Keyword Search},
+  author={Mendels, Gideon and Cooper, Erica and Hirschberg, Julia},
+  booktitle={Proc. of Web as Corpus Workshop (WAC-X) and the EmpiriST Shared Task},
+  pages={72--81},
+  year={2016}
+}
+```
+
+
+## Acknowledgements
+
+This work is supported by the Intelligence Advanced Research
+Projects Activity (IARPA) via Department of Defense
+U.S. Army Research Laboratory (DoD/ARL) contract number
+W911NF-12-C-0012. The U.S. Government is authorized to
+reproduce and distribute reprints for Governmental purposes
+notwithstanding any copyright annotation thereon. Disclaimer:
+The views and conclusions contained herein are those of the authors
+and should not be interpreted as necessarily representing
+the official policies or endorsements, either expressed or implied,
+of IARPA, DoD/ARL, or the U.S. Government.
