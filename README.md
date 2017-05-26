@@ -47,7 +47,7 @@ we can build a list of medical terms and then save all the tweets that contain t
 the tweets we find are in Spanish. 
  
 ```shell
-$ java -jar target/Babler-1.0.jar --module twitter -wordlist /path/to/wordlist.txt  --lang spa --config config.properties
+$ java -jar target/Babler-1.0.jar --module twitter --wordlist /path/to/wordlist.txt  --lang spa --config config.properties
 ```
  
 In this example we set the module to twitter, use the wordlist argument to provide a path to a file that contains words (one per line) and force the results to be in Spanish using the ISO639-2 language code format. We also use the --config flag to provide the path to the config file that contains the API keys.
