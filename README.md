@@ -141,6 +141,31 @@ Where LANGCODE is the ISO639-2 language code you used for collection.
  
  ## Additional Stuff
 [List of ISO639-2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)
+
+### Obtaining API Keys ###
+
+ #### Twitter ####
+
+1.	Navigate to https://dev.twitter.com/apps/new
+2.	Log in
+3.	Fill information in the required fields (Name, Description, Website (Eg: www.google.com)
+4.	Select the check box “Yes, I agree” to accept the Terms of Service
+5.	Solve the CAPTCHA (if any)
+6.	Submit the form.
+7.	Navigate to the “Keys and Access tokens” tab. Here, you will find your Consumer key (API Key), Consumer secret key (API secret), Access Token, Access Token Secret.
+
+ #### Bing ####
+
+1.	Navigate to http://www.bing.com/developers/
+2.	Click on the Get Started button under Search API
+3.	Choose an option according to the search volume you need.
+4.	Click on “Sign Up”
+5.	If you have a windows live account, sign in or sign up for a new account
+6.	Next, you need to create a Windows Azure Marketplace account
+7.	Fill in the information, press “Continue” and accept the terms of use
+8.	Next, sign up for the Bing Search API, Fill in the information, accept the terms of use then click on “Sign Up”
+9.	Next, click on “EXPLORE THIS DATASET”
+10.	Click on “Show” near “Primary Account Key” to see your Bing API Key
  
  
  ## References 
