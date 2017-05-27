@@ -63,6 +63,8 @@ This is very similar to the previous example but it allows us to run the same ta
 ```shell
 $ java -jar target/Babler-1.0.jar -m twitter --langs mon spa heb --seedsFolder /path/to/seed_folder/ --config config.properties
 ```
+
+Note: To collect blog posts change the module to 'bs'. i.e: `-m bs`
  
 Similarly to the previous example we use the twitter module. In this case we use the --langs flag to collect data in Mongolian, Spanish and Hebrew. We also use the --seedsFolder to provide a path to the respective wordlists. Your seeds folder should follow the following structure:
 ```shell
