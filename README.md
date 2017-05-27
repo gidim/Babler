@@ -78,6 +78,22 @@ Notice we changed the module to twitterCodeSwitch. Here we request the English/S
 This module will force Spanish language detection for English, and English LID for Spanish.
 * For code switching use ISO-639-1 Lang Codes
  
+#### Command Line Arguments ####
+```shell
+
+ -c (--config) VAL       : Sets the path to config file, if not provided loads
+                           default
+ -d (--debug)            : Sets choice to debug (default: false)
+ -ex (--export) VAL      : Path to Export a single text file with all the data
+                           in the DB
+ -l (--lang) VAL         : Sets the data collection language in ISO_639_2
+                           format (default: )
+ -m (--module) VAL       : Chooses the collection module out of 'bs'
+                            'twitter', 'twitterCodeSwitch', 'bb, 'youtube'
+ -sd (--seedsFolder) VAL : Path to seed folder containing files in the format
+                           of LANGCODEMostCommon.txt (default: )
+ -wl (--wordlist) VAL    : Path to specialized word list
+```
 ## Reading Data
 Once you finished your data collection there are a few methods to read the data:
 1. Use the text files stored in your `productionScarpingFolderPath`. The folder would follow this structure:
