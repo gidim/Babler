@@ -91,7 +91,7 @@ This module will force Spanish language detection for English, and English LID f
  -m (--module) VAL       : Chooses the collection module out of 'bs'
                             'twitter', 'twitterCodeSwitch', 'bb, 'youtube'
  -sd (--seedsFolder) VAL : Path to seed folder containing files in the format
-                           of LANGCODEMostCommon.txt (default: )
+                           of LANGCODE.txt (default: )
  -wl (--wordlist) VAL    : Path to specialized word list
 ```
 ## Reading Data
