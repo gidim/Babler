@@ -42,6 +42,7 @@ public class BSFetcherAndSaver extends BabelConsumer implements Runnable{
                 data = (BSJob) broker.get();
                 if (data != null) {
                     searchAndSave(data);
+                    viewManager.printToConsole();
                 }
             }
         }

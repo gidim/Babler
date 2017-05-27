@@ -1,7 +1,7 @@
 package edu.columbia.main.collection;
 
-import edu.columbia.main.LogDB;
 import edu.columbia.main.LanguageDataManager;
+import edu.columbia.main.LogDB;
 import edu.columbia.main.configuration.BabelConfig;
 import edu.columbia.main.db.DAO;
 import org.apache.commons.httpclient.HttpClient;
@@ -9,7 +9,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by Gideon on 4/8/15.
@@ -23,10 +25,9 @@ public class BabelProducer implements Runnable{
     protected String lang;
     protected ArrayList<String> words;
     protected Set<String> users;
+    protected boolean byUsers = false;
     Logger log = Logger.getLogger(BabelProducer.class);
     int ngram = BabelConfig.getInstance().getConfigFromFile().ngram();
-
-    protected boolean byUsers = false;
 
     public BabelProducer(BabelBroker broker, HttpClient httpClient, String language) {
         this.broker = broker;
@@ -167,36 +168,12 @@ public class BabelProducer implements Runnable{
 
         }
     }
-    //Sania:
-    //todo: replace with reading form database
+
     private Set<String> getUsersFromDB()
     {
         return DAO.getAllTwitterUserIds();
     }
 
 
-//    private Set<String> getUserIDsFromFile() {
-//        File f = new File("scraping/"+lang+"/TopsyUsers.txt");
-//        Set<String> users = new HashSet<String>();
-//        BufferedReader br = null;
-//        try {
-//            br = new BufferedReader(new FileReader(f));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String line;
-//        try {
-//            while ((line = br.readLine()) != null) {
-//                int comma = line.indexOf(',');
-//                String username = line.substring(4,comma);
-//                users.add(username);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return users;
-//    }
 
 }

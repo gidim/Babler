@@ -1,9 +1,10 @@
 package edu.columbia.main.bing.phpBBScraper;
 
-import edu.columbia.main.language_id.LanguageDetector;
 import edu.columbia.main.LanguageDataManager;
 import edu.columbia.main.MTHttpClient;
 import edu.columbia.main.collection.BabelScraper;
+import edu.columbia.main.language_id.LanguageDetector;
+import edu.columbia.main.screen_logging.ViewManager;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.log4j.Logger;
 
@@ -43,7 +44,7 @@ public class BBJobManager extends BabelScraper {
         HttpClient httpClient = new MTHttpClient().getClient();
         String[] langs = LanguageDataManager.getLanguages();
         Logger log = Logger.getLogger(BBJobManager.class);
-
+        ViewManager viewManager = new ViewManager(langs);
 
         ExecutorService consumers = Executors.newFixedThreadPool(NUM_OF_CONSUMERS);
         ExecutorService producers = Executors.newFixedThreadPool(NUM_OF_PRODUCERS); //one for each languageCode
@@ -57,7 +58,7 @@ public class BBJobManager extends BabelScraper {
 
         //initiate consumers
         for(int i = 0 ; i < NUM_OF_CONSUMERS; i++){
-            consumers.execute(new BBFetcherAndSaver(broker, lp,i, httpClient));
+            consumers.execute(new BBFetcherAndSaver(broker, lp, i, httpClient, viewManager));
         }
 
 

@@ -1,11 +1,12 @@
 package edu.columbia.main.bing.phpBBScraper;
 
 import edu.columbia.main.FileSaver;
+import edu.columbia.main.collection.BabelConsumer;
 import edu.columbia.main.db.DAO;
 import edu.columbia.main.db.Models.ForumPost;
 import edu.columbia.main.language_id.LanguageDetector;
 import edu.columbia.main.language_id.Result;
-import edu.columbia.main.collection.BabelConsumer;
+import edu.columbia.main.screen_logging.ViewManager;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -28,12 +29,14 @@ import java.util.List;
  */
 public class BBFetcherAndSaver extends BabelConsumer implements Runnable{
 
+    private final ViewManager viewManager;
     HttpClient httpClient;
     Logger log = Logger.getLogger(BBFetcherAndSaver.class);
 
-    public BBFetcherAndSaver(BBBroker broker, LanguageDetector languageDetector, int i, HttpClient httpClient) {
+    public BBFetcherAndSaver(BBBroker broker, LanguageDetector languageDetector, int i, HttpClient httpClient, ViewManager viewManager) {
         super(broker, languageDetector, i, null);
         this.httpClient = httpClient;
+        this.viewManager = viewManager;
     }
 
     /**
@@ -50,6 +53,7 @@ public class BBFetcherAndSaver extends BabelConsumer implements Runnable{
                 data = (BBJob) broker.get();
                 if (data != null) {
                     searchAndSave(data);
+                    viewManager.printToConsole();
                 }
             }
         }
@@ -99,11 +103,16 @@ public class BBFetcherAndSaver extends BabelConsumer implements Runnable{
                         FileSaver file = new FileSaver(content, job.getLanguage(), "phpbb", url, String.valueOf(post.getId()), String.valueOf(post.getContent().hashCode()));
                         String filename = file.getFileName();
                         ForumPost forumPost = new ForumPost(content,job.getLanguage(),null,"phpbb",url,String.valueOf(post.getId()),filename);
-                        if(DAO.saveEntry(forumPost))
+                        if (DAO.saveEntry(forumPost)) {
                             file.save(job.getDB());
+                            viewManager.getLogger(job.getLanguage()).incrementSaved();
+                        } else {
+                            viewManager.getLogger(job.getLanguage()).incrementDuplicate();
+                        }
                     }
                     else{
                         count -=5;
+                        viewManager.getLogger(job.getLanguage()).incrementNotInLang();
                     }
 
                     if(count < 0)
