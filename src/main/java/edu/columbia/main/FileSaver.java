@@ -97,12 +97,12 @@ public class FileSaver {
             String filename  = getFileName();
             File f = new File(filename);
             if(f.exists()) {
-                log.info(filename + " Already exists");
+                log.warn(filename + " Already exists");
                 return f.getName();
             }
 
             FileUtils.writeStringToFile(f, content, "UTF-8");
-            log.info("File Saved: " + filename);
+
 
             LogDB.logWithUrl(id + "#" + hash, url, language);
 

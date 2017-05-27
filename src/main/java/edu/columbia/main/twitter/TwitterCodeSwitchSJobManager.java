@@ -3,6 +3,7 @@ package edu.columbia.main.twitter;
 import edu.columbia.main.LanguageDataManager;
 import edu.columbia.main.configuration.TwitterKeysConfiguration;
 import edu.columbia.main.language_id.LanguageDetector;
+import edu.columbia.main.screen_logging.ViewManager;
 import org.apache.log4j.Logger;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -29,6 +30,7 @@ public class TwitterCodeSwitchSJobManager {
     Twitter[] keys = new Twitter[twitKey.length]; //keys
 
     Logger log = Logger.getLogger(TwitterJobManager.class);
+    ViewManager viewManager = new ViewManager(LanguageDataManager.getLanguages());
 
     public TwitterCodeSwitchSJobManager()
     {
@@ -60,7 +62,7 @@ public class TwitterCodeSwitchSJobManager {
         int keyIndex = 0;
 
         for(int i=0 ; i < langs.length ; i ++){
-            scrapers[i] = new TwitterCodeSwitchScraper(langs[i], languageDetector);
+            scrapers[i] = new TwitterCodeSwitchScraper(langs[i], languageDetector, viewManager);
         }
 
         while(true) {

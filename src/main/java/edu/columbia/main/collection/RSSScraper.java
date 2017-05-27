@@ -5,21 +5,22 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 import edu.columbia.main.FileSaver;
 import edu.columbia.main.LogDB;
 import edu.columbia.main.db.DAO;
 import edu.columbia.main.db.Models.BlogPost;
 import edu.columbia.main.language_id.LanguageDetector;
 import edu.columbia.main.language_id.Result;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import com.sun.syndication.io.XmlReader;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -46,7 +47,7 @@ public class RSSScraper {
     }
 
 
-    public void fetchAndSave() throws Exception {
+    public AbstractMap.SimpleEntry<Integer, Integer> fetchAndSave() throws Exception {
 
         URL url = new URL(this.url);
 
@@ -64,7 +65,6 @@ public class RSSScraper {
         List <SyndEntry> entries = feed.getEntries();
 
         for (SyndEntry item : entries){
-
             log.info("Title: " + item.getTitle());
             log.info("Link: " + item.getLink());
             SyndContentImpl contentHolder = (SyndContentImpl) item.getContents().get(0);
@@ -73,8 +73,6 @@ public class RSSScraper {
             //content might contain html data, let's clean it up
             Document doc = Jsoup.parse(content);
             content = doc.text();
-
-
             try {
                     Result result = ld.detectLanguage(content, language);
                     if (result.languageCode.equals(language) && result.isReliable) {
@@ -87,14 +85,14 @@ public class RSSScraper {
                             numOfFiles++;
                             wrongCount = 0;
                         }
+
                     }
 
                     else{
                         log.info("Item " + item.getTitle() + "is in a diff languageCode, skipping this post  "+ result.languageCode);
                         wrongCount ++;
                         if(wrongCount > 3){
-                            log.debug("Already found 3 posts in the wrong languageCode, skipping this blog");
-                            return;
+                            log.info("Already found 3 posts in the wrong languageCode, skipping this blog");
                         }
                         break;
                     }
@@ -107,7 +105,7 @@ public class RSSScraper {
 
 
         }
-
+        return new AbstractMap.SimpleEntry<>(numOfFiles,wrongCount);
     }
 
     public static List getAllPostsFromFeed(String urlToGet, String source) throws IOException, FeedException {

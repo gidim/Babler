@@ -7,8 +7,8 @@ import edu.columbia.main.configuration.BabelConfig;
 import edu.columbia.main.db.DAO;
 import edu.columbia.main.db.Models.Tweet;
 import edu.columbia.main.language_id.LanguageDetector;
-import edu.columbia.main.language_id.Result;
 import edu.columbia.main.normalization.TwitterNormalizer;
+import edu.columbia.main.screen_logging.ViewManager;
 import org.apache.log4j.Logger;
 import twitter4j.*;
 
@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class TwitterCodeSwitchScraper {
 
+    private ViewManager viewManager;
     private Twitter twitter;
     private int counter = 0;
     private int numOfRequests = 0;
@@ -35,11 +36,13 @@ public class TwitterCodeSwitchScraper {
     static int ngram = BabelConfig.getInstance().getConfigFromFile().ngram();
 
 
-    public TwitterCodeSwitchScraper(String language,LanguageDetector languageDetector){
+    public TwitterCodeSwitchScraper(String language, LanguageDetector languageDetector, ViewManager viewManager){
         this.lang = language; //1 lang per scraper
         this.words = LanguageDataManager.getMostCommonWords(this.lang,5000, ngram);
         this.logDb =  new LogDB(this.lang); //saving text files
         this.languageDetector = languageDetector;
+        this.viewManager = viewManager;
+
     }
 
 
@@ -102,19 +105,22 @@ public class TwitterCodeSwitchScraper {
             for (Status tweet : tweets) {
                 try {
                     if(map.get(tweet.getText()) == null) {
-                        System.out.print("T,");
                         String content = tweet.getText();
                         String url = "http://twitter.com/" + tweet.getUser().getId() + "/status/" + tweet.getId();
                         String origContent = content;
                         content = new TwitterNormalizer().cleanTweet(content);
                         if (content.contains(word)) {
-                            log.info("\n");
                             String output_dir = "twitter_cs_" + firstLangArgument + "+" + secondLangArgument;
                             FileSaver file = new FileSaver(content, lang, output_dir, url, String.valueOf(tweet.getId()));
                             String filename = file.getFileName();
                             Tweet t = new Tweet(content,origContent,this.lang,tweet.getUser().getScreenName(),null, output_dir,url,String.valueOf(tweet.getId()),filename);
-                            if(DAO.saveEntry(t))
+                            if(DAO.saveEntry(t)) {
                                 file.save(logDb);
+                                this.viewManager.getLogger(this.lang).incrementSaved();
+                            }
+                            else{
+                                this.viewManager.getLogger(this.lang).incrementDuplicate();
+                            }
                             this.map.put(tweet.getText(),true); //to not repeat
                             counter++;
                             if(counter > 500){ //refresh map cache

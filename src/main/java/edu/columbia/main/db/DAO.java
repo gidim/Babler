@@ -1,9 +1,7 @@
 package edu.columbia.main.db;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoWriteException;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -12,16 +10,13 @@ import edu.columbia.main.db.Models.DBEntry;
 import edu.columbia.main.db.Models.ForumPost;
 import edu.columbia.main.db.Models.Tweet;
 import org.apache.log4j.Logger;
-import org.bson.Document;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.exists;
+
+import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.include;
 
 /**
@@ -59,7 +54,8 @@ public class DAO {
             return true;
         }
         catch (MongoWriteException ex){
-            log.error(ex.getError().getMessage());
+            if (ex.getCode() != 11000) // Ignore errors about duplicates
+                log.error(ex.getError().getMessage());
             return false;
         }
 
