@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
-
+import edu.columbia.main.LogDB;
 
 class URL{
 
@@ -37,7 +37,8 @@ public class TEDScraper {
     private ArrayList<URL> urls;
     /** the destination langauge */
     private String language;
-
+    private LogDB logDb;
+    
     /**
      * Parses all the pages containing links to talks in a specific languageCode
      * saves it to urls and then calls getAndSaveData()
@@ -46,6 +47,7 @@ public class TEDScraper {
     public TEDScraper(String language) {
         this.language = language;
         String iso1Lang = LanguageCode.convertIso2toIso1(language);
+        this.logDb = new LogDB(this.language); //saving text files
 
         urls = new ArrayList<URL>(2);
 
@@ -95,7 +97,8 @@ public class TEDScraper {
                     //remove everything after the ? -> /talks/ze_frank_are_you_human?languageCode=lt
                     modifiedLink = modifiedLink.substring(0, modifiedLink.indexOf("?"));
                     //add to array of all links
-                    urls.add(new URL("https://www.ted.com" + modifiedLink + "/transcript?language=" + iso1Lang, language,modifiedLink.substring((modifiedLink.indexOf("/talks/")+"/talks/".length()),modifiedLink.length())));
+                    urls.add(new URL("https://www.ted.com" + modifiedLink + "/transcript.json?language=" + iso1Lang, language,modifiedLink.substring((modifiedLink.indexOf("/talks/")+"/talks/".length()),modifiedLink.length())));
+		    //urls.add(new URL("https://www.ted.com" + modifiedLink + "/transcript.json?language=en", "eng", modifiedLink.substring((modifiedLink.indexOf("/talks/")+"/talks/".length()),modifiedLink.length())));
                 }
 
             }
@@ -114,15 +117,8 @@ public class TEDScraper {
 
             HTTPClient client = new HTTPClient(url.url);
             String html = client.getHTMLData();
-            Document doc = Jsoup.parse(html);
-
-            content = doc.select(".talk-transcript__para__text").text();
-
-            FileSaver file = new FileSaver(content,url.language,"TED",url.url);
-            file.save(null);
-
-            //todo: add mongo support
-
+            FileSaver file = new FileSaver(html, url.language, "TED", url.url, url.title + ".json");
+	    file.save(logDb);
         }
     }
 
