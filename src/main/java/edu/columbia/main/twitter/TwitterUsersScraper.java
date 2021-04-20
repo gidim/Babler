@@ -19,12 +19,10 @@ import java.util.*;
 /**
  * Created by Gideon on 2/9/16.
  */
-public class TwitterUsersScraper {
+public class TwitterUsersScraper extends TwitterScraperTemplate{
 
-    private Twitter twitter;
 
-    private String lang;
-    private LanguageDetector languageDetector;
+
     // list of users
     private Set <String> users;
     private LogDB logDb;
@@ -139,8 +137,5 @@ public class TwitterUsersScraper {
         }
     }
 
-    public void setKey(Twitter key) {
-        this.twitter = key;
-    }
 }
 

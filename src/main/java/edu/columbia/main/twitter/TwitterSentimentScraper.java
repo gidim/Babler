@@ -27,17 +27,14 @@ import java.util.*;
  * Consumes the Twitter API for a given language
  * Saves all found tweets
  */
-public class TwitterSentimentScraper implements Serializable {
+public class TwitterSentimentScraper implements Serializable extends TwitterScraperTemplate {
 
-    private Twitter twitter;
     private int counter = 0;
     private int numOfRequests = 0;
     private HashMap<String,Boolean> map = new HashMap<String,Boolean>();
     private ArrayList<String> words;
     private LogDB logDb;
-    private String lang;
     private Sentiment sentiment;
-    private LanguageDetector languageDetector;
 
     static Logger log = Logger.getLogger(TwitterScraper.class);
     static int ngram = BabelConfig.getInstance().getConfigFromFile().ngram();
@@ -139,12 +136,6 @@ public class TwitterSentimentScraper implements Serializable {
             }
         } while ((query = result.nextQuery()) != null);
 
-    }
-
-
-
-    public void setKey(Twitter key) {
-        this.twitter = key;
     }
 
 
