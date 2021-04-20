@@ -19,15 +19,26 @@ import java.util.Scanner;
 
 public class LogDB implements Serializable{
 
-    public static final String SCRAPING_FOLDER = BabelConfig.getPathToScrapingFolder()+"/";
-    public static final String LOG_FILE = "/log2.txt";
+    public final String SCRAPING_FOLDER = BabelConfig.getPathToScrapingFolder()+"/";
+    public final String LOG_FILE = "/log2.txt";
     private HashMap<String,LogDBEntry> db;
-    File dbFile;
-    static Logger log = Logger.getLogger(LogDB.class);
+    private File dbFile;
+    private Logger log = Logger.getLogger(LogDB.class);
 
-    public LogDB(String lang){
+    // static singleton instance
+    private static LogDB logDBInstance = new LogDB();
 
-       this.dbFile = new File(SCRAPING_FOLDER+lang+LOG_FILE);
+    // private constructor
+    private LogDB();
+
+    // getter method for singleton instance
+    public static LogDB getLogDBInstance(){
+        return logDBInstance;
+    }
+
+    // set DB file with language
+    public void setDBFile(String lang){
+        this.dbFile = new File(SCRAPING_FOLDER+lang+LOG_FILE);
 
         if(!dbFile.exists()){
             File dir = new File(SCRAPING_FOLDER +lang);
@@ -40,10 +51,14 @@ public class LogDB implements Serializable{
             }
         }
        readDBFromFile();
-   }
+    }
 
-    public LogDB(String lang, String type){
+    // set DB file with language and type
+    public void setDBFile(String type, String lang){
 
+    }
+
+    public LogDB(String lang){
         this.dbFile = new File(SCRAPING_FOLDER+lang+"/"+type+".txt");
         if(!dbFile.exists())
             try {
@@ -52,8 +67,10 @@ public class LogDB implements Serializable{
                 log.error(e);
             }
 
-        readDBFromFile();
-    }
+        readDBFromFile(); 
+   }
+
+   
 
     private void readDBFromFile() {
 
@@ -77,7 +94,7 @@ public class LogDB implements Serializable{
     }
 
     @Deprecated
-    public static void log(String id, String lang){
+    public void log(String id, String lang){
         try {
             File f = new File(SCRAPING_FOLDER+lang+LOG_FILE);
             FileUtils.writeStringToFile(f, "id: "+id+"\n",true);
@@ -94,7 +111,7 @@ public class LogDB implements Serializable{
      * @param url the location from which we got that post
      * @param lang the languageCode of the post
      */
-    public static void logWithUrl(String id, String url, String lang){
+    public void logWithUrl(String id, String url, String lang){
         try {
             File f = new File(SCRAPING_FOLDER+lang+LOG_FILE);
             FileUtils.writeStringToFile(f, "id: " +id+ ", url:"+url+"\n",true);
@@ -128,7 +145,7 @@ public class LogDB implements Serializable{
      * @return true for new posts
      */
 
-    public static boolean isNew(String id, String lang){
+    public boolean isNew(String id, String lang){
 
         File f = new File(SCRAPING_FOLDER+lang+LOG_FILE);
         if(f.exists())
@@ -153,7 +170,7 @@ public class LogDB implements Serializable{
      * @return Last id in the log +1 OR a random int
      * @throws Exception if failed to get id
      */
-    public static String getNewId(String lang) throws Exception {
+    public String getNewId(String lang) throws Exception {
         File f = new File(SCRAPING_FOLDER+lang+LOG_FILE);
         String id = "";
 
@@ -202,7 +219,7 @@ public class LogDB implements Serializable{
      * @param searchString
      * @return true if found
      */
-    public static boolean find(File f, String searchString) {
+    public boolean find(File f, String searchString) {
         boolean result = false;
         Scanner in = null;
         try {
