@@ -95,6 +95,7 @@ public class BabelMain {
 
         setSystemSettings();
         CmdLineParser parser = new CmdLineParser(this);
+        TwitterScraperFactory twitterFactory = new TwitterScraperFactory();
 
         try {
             // parse the arguments.
@@ -170,13 +171,11 @@ public class BabelMain {
 
         else if(module.equals("twitterSentiment")){
 
-            TwitterSentimentJobManager tjm= new TwitterSentimentJobManager();
-            tjm.start();
+            twitterFactory.getTwitterScraper("TwitterSentiment");
         }
         else if(module.equals("twitterCodeSwitch")){
 
-            TwitterCodeSwitchSJobManager tjm= new TwitterCodeSwitchSJobManager();
-            tjm.start();
+            twitterFactory.getTwitterScraper("TwitterCodeSwitch");
         }
 
         /**
@@ -184,14 +183,14 @@ public class BabelMain {
          * For every user's tweet in the DB fetches all that user's tweets.
          */
         else if(module.equals("twitterUsers")){
-            new TwitterJobManagerUser().start();
+            twitterFactory.getTwitterScraper("TwitterUsers");
         }
 
         /**
          * Collects data from web forums based on phpBB. Based on Bing
          */
         else if(module.equals("bb")){
-            new BBJobManager().run();
+            new BBJobManager.run();
 
         }
 

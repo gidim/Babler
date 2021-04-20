@@ -20,17 +20,15 @@ import java.util.List;
 /**
  * Created by Gideon on 30/09/2016.
  */
-public class TwitterCodeSwitchScraper {
+public class TwitterCodeSwitchScraper extends TwitterScraperTemplate{
 
     private ViewManager viewManager;
-    private Twitter twitter;
     private int counter = 0;
     private int numOfRequests = 0;
     private HashMap<String,Boolean> map = new HashMap<String,Boolean>();
     private ArrayList<String> words;
     private LogDB logDb;
-    private String lang;
-    private LanguageDetector languageDetector;
+
 
     static Logger log = Logger.getLogger(TwitterScraper.class);
     static int ngram = BabelConfig.getInstance().getConfigFromFile().ngram();
@@ -137,11 +135,6 @@ public class TwitterCodeSwitchScraper {
 
     }
 
-
-
-    public void setKey(Twitter key) {
-        this.twitter = key;
-    }
 
 
 
